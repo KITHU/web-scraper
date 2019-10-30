@@ -34,15 +34,20 @@ def scrap_remotive_dev():
         stacks=[]
         job = {}
     return arr
-def job():
-    print("wewe wewe")
 
-schedule.every(2).minutes.do(job)
+with open('jobs_from_remotive.csv', mode='w') as csv_file:
+    fieldnames = ['title', 'link', 'company', 'stacks']
+    writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+    writer.writeheader()
+    for dicts in scrap_remotive_dev():
+        writer.writerow(dicts)
+
+schedule.every(1).minutes.do(scrap_remotive_dev)
 
 while True:
     schedule.run_pending()
+    print("2")
     time.sleep(1)
-    
 
-# print(scrap_remotive_dev())
 
