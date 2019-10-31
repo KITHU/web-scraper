@@ -43,11 +43,10 @@ with open('jobs_from_remotive.csv', mode='w') as csv_file:
     for dicts in scrap_remotive_dev():
         writer.writerow(dicts)
 
-schedule.every(1).minutes.do(scrap_remotive_dev)
+schedule.every().day.at("10:30").do(scrap_remotive_dev)
 
 while True:
     schedule.run_pending()
-    print("2")
     time.sleep(1)
 
 
